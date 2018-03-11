@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>PharmEasy</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/heroic-features.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Satajeet Biswas</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <!-- <li class="nav-item active">
+              <a class="nav-link" href="#">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Services</a>
+            </li> -->
+            <li class="nav-item">
+              <a class="nav-link" href="/pharmeasy/login.html">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+      <!-- Jumbotron Header -->
+
+      <!-- Page Features -->
+      <div class="row text-center" style="margin-top:20px;min-height:570px;">
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card">
+            <img class="card-img-top" src="#" alt="">
+            <div class="card-body">
+              <h4 class="card-title">Add Prescription</h4>
+              <p class="card-text">Upload your prescription here along with prescription name. This prescription name will be visible to all doctors and pharmacies. If they want to see your prescription, they will ask for your approval and you have to approve it</p>
+            </div>
+            <div class="card-footer">
+              <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModalAdd">Add Prescription</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card">
+            <img class="card-img-top" src="#" alt="">
+            <div class="card-body">
+              <h4 class="card-title">View Prescription</h4>
+              <p class="card-text">See your prescriptions that you have added earlier</p>
+            </div>
+            <div class="card-footer">
+              <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModalView">View Prescription</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card">
+            <img class="card-img-top" src="#" alt="">
+            <div class="card-body">
+              <h4 class="card-title">Approval Request</h4>
+              <p class="card-text">Find out the doctors and pharmacists who wants to see your prescription. You can approve or reject from here</p>
+            </div>
+            <div class="card-footer">
+              <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModalViewRequest">Find Request</a>
+            </div>
+          </div>
+        </div>
+
+        
+
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+
+<!--Add-->
+    <div class="modal fade" id="myModalAdd" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title">Add your prescription</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+  <h4>Prescription Details</h4>
+  <form>
+    <div class="form-group">
+      <label for="pname">Prescription Name</label>
+      <input type="text" class="form-control" id="pname" placeholder="Enter prescription name">
+    </div>
+    <div class="form-group">
+      <label for="pdesc">Description</label>
+      <textarea type="textarea" class="form-control" id="pdesc" placeholder="Enter some details"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="medr">Medical Record</label>
+      <textarea class="form-control" id="medr" placeholder="Enter medical records"></textarea>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!--Add end-->
+
+  <!--View-->
+      <div class="modal fade" id="myModalView" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content" style="width:1000px;margin-left:-49%">
+          <div class="modal-header">
+            <h2 class="modal-title">View your prescription</h2>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+    <form>
+      <div class="container">
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Prescription Name</th>
+        <th>Description</th>
+        <th>Medical Record</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Prescription name 1</td>
+        <td>Prescription name 1 desc</td>
+        <td>Symptom 1</br>Symptom 2</br>Symptom 3</td>
+      </tr>
+      <tr>
+        <td>Prescription name 2</td>
+        <td>Prescription name 2 desc</td>
+        <td>Symptom 1</br>Symptom 2</br>Symptom 3</td>
+      </tr>
+      <tr>
+        <td>Prescription name 3</td>
+        <td>Prescription name 3 desc</td>
+        <td>Symptom 1</br>Symptom 2</br>Symptom 3</td>
+      </tr>
+      <tr>
+        <td>Prescription name 4</td>
+        <td>Prescription name 4 desc</td>
+        <td>Symptom 1</br>Symptom 2</br>Symptom 3</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+    </form>
+  </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!--View end-->
+
+
+      <!--Requester-->
+          <div class="modal fade" id="myModalViewRequest" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content" style="width:700px;margin-left:-22%">
+              <div class="modal-header">
+                <h2 class="modal-title">View your prescription</h2>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                <div class="container">
+        <form>
+          <div class="container">
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Prescription Name</th>
+            <th>Requester Name</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Prescription 1</td>
+            <td>Dr. Milan Batra</td>
+            <td><button type="submit" class="btn btn-success">Approve</button><button type="submit" class="btn btn-danger" style="width:86px;margin-left:20px;">Reject</button></td>
+          </tr>
+          <tr>
+            <td>Prescription 2</td>
+            <td>Franklin Phrmacies</td>
+            <td><button type="submit" class="btn btn-success">Approve</button><button type="submit" class="btn btn-danger" style="width:86px;margin-left:20px;">Reject</button></td>
+          </tr>
+          <tr>
+            <td>Prescription 3</td>
+            <td>Dr. Niharika Bose</td>
+            <td><button type="submit" class="btn btn-success">Approve</button><button type="submit" class="btn btn-danger" style="width:86px;margin-left:20px;">Reject</button></td>
+          </tr>
+        <tr>
+          <td>Prescription 4</td>
+          <td>Capital Pharmacay</td>
+          <td><button type="submit" class="btn btn-success">Approve</button><button type="submit" class="btn btn-danger" style="width:86px;margin-left:20px;">Reject</button></td>
+        </tr>
+        <tr>
+          <td>Prescription 5</td>
+          <td>Tulip Pharmacy</td>
+          <td><button type="submit" class="btn btn-success">Approve</button><button type="submit" class="btn btn-danger" style="width:86px;margin-left:20px;">Reject</button></td>
+        </tr>
+        <tr>
+          <td>Prescription 6</td>
+          <td>Dr. Kumar Rengal</td>
+          <td><button type="submit" class="btn btn-success">Approve</button><button type="submit" class="btn btn-danger" style="width:86px;margin-left:20px;">Reject</button></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+        </form>
+      </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!--Requester end-->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; PharmEasy 2018</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  </body>
+
+</html>

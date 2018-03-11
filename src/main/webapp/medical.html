@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>PharmEasy</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/heroic-features.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Dr. Suman Mandal</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <!-- <li class="nav-item active">
+              <a class="nav-link" href="#">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Services</a>
+            </li> -->
+            <li class="nav-item">
+              <a class="nav-link" href="/pharmeasy/login.html">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+      <!-- Jumbotron Header -->
+
+      <!-- Page Features -->
+      <div class="row text-center" style="margin-top:20px;min-height:570px;">
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card">
+            <img class="card-img-top" src="#" alt="">
+            <div class="card-body">
+              <h4 class="card-title">View Patient</h4>
+              <p class="card-text">See patients list and their prescriptions  what they have added. You have to ask for approval to view them</p>
+            </div>
+            <div class="card-footer">
+              <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModalView">View Patients</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card">
+            <img class="card-img-top" src="#" alt="">
+            <div class="card-body">
+              <h4 class="card-title">Requested Prescriptions</h4>
+              <p class="card-text">Find out requests that you have made and their status. You may view them if patient has approved it</p>
+            </div>
+            <div class="card-footer">
+              <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModalViewNew">Find Request</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+  <!--View-->
+      <div class="modal fade" id="myModalView" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content" style="width:700px;margin-left:-24%">
+          <div class="modal-header">
+            <h2 class="modal-title">View Patients</h2>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+    <form>
+      <div class="container">
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Patients Name</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Satajeet Biswas</td>
+        <td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalViewRequest">View Prescriptions</button></td>
+      </tr>
+      <tr>
+        <td>Sourajyoti Bose</td>
+        <td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalViewRequest">View Prescriptions</button></td>
+      </tr>
+      <tr>
+        <td>Ajay Singh</td>
+        <td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalViewRequest">View Prescriptions</button></td>
+      </tr>
+      <tr>
+        <td>Abhishek Jhunjhunwala</td>
+        <td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalViewRequest">View Prescriptions</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+    </form>
+  </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!--View end-->
+
+
+
+
+    <!--Requester-->
+        <div class="modal fade" id="myModalViewRequest" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content" style="width:700px;margin-left:-22%">
+            <div class="modal-header">
+              <h2 class="modal-title">View patient's uploaded prescriptions</h2>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <div class="container">
+      <form>
+        <div class="container">
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Prescription Name</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Prescription 1</td>
+          <td><button type="submit" class="btn btn-primary">Request for Approval</button></td>
+        </tr>
+        <tr>
+          <td>Prescription 2</td>
+          <td><button type="submit" class="btn btn-primary">Request for Approval</button></td>
+        </tr>
+        <tr>
+          <td>Prescription 3</td>
+          <td><button type="submit" class="btn btn-primary">Request for Approval</button></td>
+        </tr>
+      <tr>
+        <td>Prescription 4</td>
+        <td><button type="submit" class="btn btn-primary">Request for Approval</button></td>
+      </tr>
+      <tr>
+        <td>Prescription 5</td>
+        <td><button type="submit" class="btn btn-primary">Request for Approval</button></td>
+      </tr>
+      <tr>
+        <td>Prescription 6</td>
+        <td><button type="submit" class="btn btn-primary">Request for Approval</button></td>
+      </tr>
+      </tbody>
+    </table>
+    </div>
+      </form>
+    </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!--Requester end-->
+
+      <!--ViewNew-->
+          <div class="modal fade" id="myModalViewNew" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content" style="width:700px;margin-left:-24%">
+              <div class="modal-header">
+                <h2 class="modal-title">View Patients</h2>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                <div class="container">
+        <form>
+          <div class="container">
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Patients Name</th>
+            <th>Prescription Name</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Satajeet Biswas</td>
+            <td>Prescription 1</td>
+            <td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalAdd">View Prescriptions</button></td>
+          </tr>
+          <tr>
+            <td>Sourajyoti Bose</td>
+            <td>Prescription 2</td>
+            <td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalAdd">View Prescriptions</button></td>
+          </tr>
+          <tr>
+            <td>Ajay Singh</td>
+            <td>Prescription 3</td>
+            <td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalAdd">View Prescriptions</button></td>
+          </tr>
+          <tr>
+            <td>Abhishek Jhunjhunwala</td>
+            <td>Prescription 4</td>
+            <td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalAdd">View Prescriptions</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+        </form>
+      </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!--ViewNew end-->
+
+        <!--Add-->
+            <div class="modal fade" id="myModalAdd" role="dialog">
+            <div class="modal-dialog">
+
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h2 class="modal-title">Prescription</h2>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <div class="container">
+          <h4>Prescription Details</h4>
+          <form>
+            <div class="form-group">
+              <label for="pname">Prescription Name</label>
+              <label class="form-control" id="pname">Prescription name here</label>
+            </div>
+            <div class="form-group">
+              <label for="pdesc">Description</label>
+              <label class="form-control" id="pdesc">Prescription description here</label>
+            </div>
+            <div class="form-group">
+              <label for="medr">Medical Record</label>
+              <label class="form-control" id="medr">Symptom 1</br>Symptom 2</br>Symptom 3</label>
+            </div>
+          </form>
+        </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!--Add end-->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; PharmEasy 2018</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  </body>
+
+</html>
