@@ -19,7 +19,7 @@ public class UserApiTest {
 	private static String basePath = "http://localhost:8080/pharmeasy/user";
 
 	// @Test
-	public void testCreateUser() {
+	public void testCreateUser_Success() {
 		User user = new User();
 		user.setPassword("pwd");
 		user.setUserId(1);
@@ -36,7 +36,58 @@ public class UserApiTest {
 	}
 
 	// @Test
-	public void testRetrieveUserByDetails() {
+	public void testCreateUser_Failure() {
+		User user = new User();
+		user.setPassword("pwd");
+		user.setUserId(1);
+		user.setUserName("name");
+		user.setUserType("User");
+
+		Client client = ClientBuilder.newClient();
+		WebTarget webTarget = client.target(basePath);
+		Response response = null;
+		Builder builder = webTarget.request(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON);
+		Entity<User> entity = Entity.entity(user, MediaType.APPLICATION_JSON);
+		response = builder.post(entity, Response.class);
+		Assert.assertEquals(response.getStatus() == 201, true);
+	}
+
+	// @Test
+	public void testUpdateUser_Success() {
+		User user = new User();
+		user.setPassword("pwd");
+		user.setUserId(1);
+		user.setUserName("name");
+		user.setUserType("User");
+
+		Client client = ClientBuilder.newClient();
+		WebTarget webTarget = client.target(basePath);
+		Response response = null;
+		Builder builder = webTarget.request(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON);
+		Entity<User> entity = Entity.entity(user, MediaType.APPLICATION_JSON);
+		response = builder.put(entity, Response.class);
+		Assert.assertEquals(response.getStatus() == 201, true);
+	}
+
+	// @Test
+	public void testUpdateUser_Failure() {
+		User user = new User();
+		user.setPassword("pwd");
+		user.setUserId(1);
+		user.setUserName("name");
+		user.setUserType("User");
+
+		Client client = ClientBuilder.newClient();
+		WebTarget webTarget = client.target(basePath);
+		Response response = null;
+		Builder builder = webTarget.request(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON);
+		Entity<User> entity = Entity.entity(user, MediaType.APPLICATION_JSON);
+		response = builder.put(entity, Response.class);
+		Assert.assertEquals(response.getStatus() == 201, true);
+	}
+
+	// @Test
+	public void testRetrieveUserByDetails_Success() {
 
 		Client client = ClientBuilder.newClient();
 		WebTarget webTarget = client.target(basePath);
@@ -48,7 +99,31 @@ public class UserApiTest {
 	}
 
 	// @Test
-	public void testRetrieveUserByType() {
+	public void testRetrieveUserByDetails_Failure() {
+
+		Client client = ClientBuilder.newClient();
+		WebTarget webTarget = client.target(basePath);
+		Response response = null;
+		Builder builder = webTarget.path("login").queryParam("userName", "satajeet").queryParam("password", "satajeet")
+				.request(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON);
+		response = builder.get();
+		Assert.assertEquals(response.getStatus() == 200, true);
+	}
+
+	// @Test
+	public void testRetrieveUserByType_Success() {
+
+		Client client = ClientBuilder.newClient();
+		WebTarget webTarget = client.target(basePath);
+		Response response = null;
+		Builder builder = webTarget.path("listUsers").queryParam("userType", "User").request(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON);
+		response = builder.get();
+		Assert.assertEquals(response.getStatus() == 200, true);
+	}
+
+	// @Test
+	public void testRetrieveUserByType_Failure() {
 
 		Client client = ClientBuilder.newClient();
 		WebTarget webTarget = client.target(basePath);

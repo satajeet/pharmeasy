@@ -19,7 +19,7 @@ public class PresciptionApiTest {
 	private static String basePath = "http://localhost:8080/pharmeasy/prescription";
 
 	// @Test
-	public void testCreatePrescription() {
+	public void testCreatePrescription_Success() {
 		Prescription prescription = new Prescription();
 		prescription.setMedicalRecords("medRec");
 		prescription.setPrescription("presc");
@@ -36,7 +36,24 @@ public class PresciptionApiTest {
 	}
 
 	// @Test
-	public void testRetrievePrescription() {
+	public void testCreatePrescription_Failure() {
+		Prescription prescription = new Prescription();
+		prescription.setMedicalRecords("medRec");
+		prescription.setPrescription("presc");
+		prescription.setPrescriptionName("prescname");
+		prescription.setUserId(0);
+
+		Client client = ClientBuilder.newClient();
+		WebTarget webTarget = client.target(basePath);
+		Response response = null;
+		Builder builder = webTarget.request(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON);
+		Entity<Prescription> entity = Entity.entity(prescription, MediaType.APPLICATION_JSON);
+		response = builder.post(entity, Response.class);
+		Assert.assertEquals(response.getStatus() != 201, true);
+	}
+
+	// @Test
+	public void testRetrievePrescription_Success() {
 
 		Client client = ClientBuilder.newClient();
 		WebTarget webTarget = client.target(basePath);
@@ -48,19 +65,19 @@ public class PresciptionApiTest {
 	}
 
 	// @Test
-	public void testRetrievePrescriptionByRequesterForUser() {
+	public void testRetrievePrescription_Failure() {
 
 		Client client = ClientBuilder.newClient();
 		WebTarget webTarget = client.target(basePath);
 		Response response = null;
-		Builder builder = webTarget.path("requester").queryParam("userId", 1).queryParam("requesterId", 1)
+		Builder builder = webTarget.path("presciption").queryParam("prescriptionId", 100)
 				.request(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON);
 		response = builder.get();
-		Assert.assertEquals(response.getStatus() == 200, true);
+		Assert.assertEquals(response.getStatus() != 200, true);
 	}
 
 	// @Test
-	public void testRetrievePrescriptionByUserId() {
+	public void testRetrievePrescriptionByUserId_Success() {
 
 		Client client = ClientBuilder.newClient();
 		WebTarget webTarget = client.target(basePath);
@@ -69,6 +86,18 @@ public class PresciptionApiTest {
 				.accept(MediaType.APPLICATION_JSON);
 		response = builder.get();
 		Assert.assertEquals(response.getStatus() == 200, true);
+	}
+
+	// @Test
+	public void testRetrievePrescriptionByUserId_Failure() {
+
+		Client client = ClientBuilder.newClient();
+		WebTarget webTarget = client.target(basePath);
+		Response response = null;
+		Builder builder = webTarget.queryParam("userId", 1).request(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON);
+		response = builder.get();
+		Assert.assertEquals(response.getStatus() != 200, true);
 	}
 
 }

@@ -1,6 +1,6 @@
 package org.pharmacy.pharmeasy.manager;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.pharmacy.pharmeasy.model.Approval;
 import org.pharmacy.pharmeasy.model.Prescription;
@@ -22,16 +22,20 @@ public interface PharmacyManager {
 
 	public User retrieveUserByDetails(String userName, String password);
 
-	public ArrayList<Approval> retrieveApprovalForDoctorPharma(Integer requesterId, Integer userId);
+	public List<Prescription> retrievePrescriptionByUserId(Integer userId);
 
-	public ArrayList<Prescription> retrievePrescriptionByUserId(Integer userId);
+	public List<Approval> retrieveApprovalForUser(Integer userId);
 
-	public ArrayList<Approval> retrieveApprovalForUser(Integer userId);
-
-	public ArrayList<User> retrieveUserByType(String userType);
-
-	public ArrayList<Prescription> retrievePrescriptionByRequesterForUser(Integer userId, Integer requester);
+	public List<User> retrieveUserByType(String userType);
 
 	public boolean rejectApproval(Integer approvalId);
+
+	public User updateUser(User user);
+
+	public List<Approval> retrieveApprovedApprovalForRequester(Integer requesterId);
+
+	public List<Approval> retrievePendingApprovalForUser(Integer userId);
+
+	List<Approval> retrieveApprovalForUserByRequester(Integer requesterId, Integer userId);
 
 }

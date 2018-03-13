@@ -1,6 +1,6 @@
 package org.pharmacy.pharmeasy;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -29,7 +29,8 @@ public class ApprovalApi {
 	}
 
 	/**
-	 * Create a request by a doctor or pharmacist to view presciption
+	 * Create a request by a doctor or pharmacist to view presciption. While
+	 * creating set "approval" parameter to "false"
 	 * 
 	 * @param approval
 	 * @return
@@ -48,7 +49,8 @@ public class ApprovalApi {
 	}
 
 	/**
-	 * Approve or reject a approval request from a doctor/pharmacist
+	 * Approve a approval request from a doctor/pharmacist - update "approval"
+	 * parameter to "true"
 	 * 
 	 * @param approval
 	 * @return
@@ -66,6 +68,12 @@ public class ApprovalApi {
 		}
 	}
 
+	/**
+	 * Get approval for an approval id
+	 * 
+	 * @param approvalId
+	 * @return
+	 */
 	@GET
 	@Path("approvalId")
 	@Consumes({ MediaType.APPLICATION_JSON })
@@ -91,10 +99,10 @@ public class ApprovalApi {
 	@Path("approvals")
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Response retrieveApprovalForDoctorPharma(@QueryParam("requesterId") Integer requesterId,
+	public Response retrieveApprovalForUserByRequester(@QueryParam("requesterId") Integer requesterId,
 			@QueryParam("userId") Integer userId) {
 		injectDependencies();
-		ArrayList<Approval> approvals = pharmacyManager.retrieveApprovalForDoctorPharma(requesterId, userId);
+		List<Approval> approvals = pharmacyManager.retrieveApprovalForUserByRequester(requesterId, userId);
 		if (approvals != null) {
 			return Response.ok().entity(approvals).build();
 		} else {
@@ -109,17 +117,65 @@ public class ApprovalApi {
 	 * @return
 	 */
 	@GET
+	@Path("pendingApproval")
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Response retrieveApprovalForUser(@QueryParam("userId") Integer userId) {
+	public Response retrievePendingApprovalForUser(@QueryParam("userId") Integer userId) {
 		injectDependencies();
-		ArrayList<Approval> approvals = pharmacyManager.retrieveApprovalForUser(userId);
+		List<Approval> approvals = pharmacyManager.retrievePendingApprovalForUser(userId);
 		if (approvals != null) {
 			return Response.ok().entity(approvals).build();
 		} else {
 			return Response.status(Status.SERVICE_UNAVAILABLE).entity(approvals).build();
 		}
 	}
+
+	/**
+	 * View all approvals by patient/user
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	@GET
+	@Path("approvalsForUser")
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response retrieveApprovalForUser(@QueryParam("userId") Integer userId) {
+		injectDependencies();
+		List<Approval> approvals = pharmacyManager.retrieveApprovalForUser(userId);
+		if (approvals != null) {
+			return Response.ok().entity(approvals).build();
+		} else {
+			return Response.status(Status.SERVICE_UNAVAILABLE).entity(approvals).build();
+		}
+	}
+
+	/**
+	 * View approvals by patient/user
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	@GET
+	@Path("requester")
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response retrieveApprovalForRequester(@QueryParam("requester") Integer requesterId) {
+		injectDependencies();
+		List<Approval> approvals = pharmacyManager.retrieveApprovedApprovalForRequester(requesterId);
+		if (approvals != null) {
+			return Response.ok().entity(approvals).build();
+		} else {
+			return Response.status(Status.SERVICE_UNAVAILABLE).entity(approvals).build();
+		}
+	}
+
+	/**
+	 * Reject approval request of a doctor or a pharmacist
+	 * 
+	 * @param approvalId
+	 * @return
+	 */
 
 	@DELETE
 	@Consumes({ MediaType.APPLICATION_JSON })

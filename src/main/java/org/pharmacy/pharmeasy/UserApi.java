@@ -1,10 +1,11 @@
 package org.pharmacy.pharmeasy;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -46,6 +47,25 @@ public class UserApi {
 	}
 
 	/**
+	 * If user wants to change password
+	 * 
+	 * @param user
+	 * @return
+	 */
+	@PUT
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response updateUser(User user) {
+		injectDependencies();
+		User userObj = pharmacyManager.updateUser(user);
+		if (user != null) {
+			return Response.ok().entity(userObj).build();
+		} else {
+			return Response.status(Status.BAD_REQUEST).entity(user).build();
+		}
+	}
+
+	/**
 	 * api for login of user
 	 * 
 	 * @param userName
@@ -79,7 +99,7 @@ public class UserApi {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response retrieveUserByType(@QueryParam("userType") String userType) {
 		injectDependencies();
-		ArrayList<User> user = pharmacyManager.retrieveUserByType(userType);
+		List<User> user = pharmacyManager.retrieveUserByType(userType);
 		if (user != null) {
 			return Response.ok().entity(user).build();
 		} else {

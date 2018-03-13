@@ -1,6 +1,6 @@
 package org.pharmacy.pharmeasy.manager.impl;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.pharmacy.pharmeasy.dao.ApprovalDao;
 import org.pharmacy.pharmeasy.dao.PrescriptionDao;
@@ -68,39 +68,51 @@ public class PharmacyManagerImpl implements PharmacyManager {
 	}
 
 	@Override
-	public ArrayList<Prescription> retrievePrescriptionByUserId(Integer userId) {
+	public List<Prescription> retrievePrescriptionByUserId(Integer userId) {
 		injectDependencies();
 		return prescriptionDao.retrievePrescriptionByUserId(userId);
 	}
 
 	@Override
-	public ArrayList<Approval> retrieveApprovalForDoctorPharma(Integer requesterId, Integer userId) {
+	public List<Approval> retrieveApprovalForUserByRequester(Integer requesterId, Integer userId) {
 		injectDependencies();
-		return approvalDao.retrieveApprovalForDoctorPharma(requesterId, userId);
+		return approvalDao.retrieveApprovalForUserByRequester(requesterId, userId);
 	}
 
 	@Override
-	public ArrayList<Approval> retrieveApprovalForUser(Integer userId) {
+	public List<Approval> retrieveApprovalForUser(Integer userId) {
 		injectDependencies();
 		return approvalDao.retrieveApprovalForUser(userId);
 	}
 
 	@Override
-	public ArrayList<User> retrieveUserByType(String userType) {
+	public List<User> retrieveUserByType(String userType) {
 		injectDependencies();
 		return userDao.retrieveUserByType(userType);
-	}
-
-	@Override
-	public ArrayList<Prescription> retrievePrescriptionByRequesterForUser(Integer userId, Integer requester) {
-		injectDependencies();
-		return prescriptionDao.retrievePrescriptionByRequesterForUser(userId, requester);
 	}
 
 	@Override
 	public boolean rejectApproval(Integer approvalId) {
 		injectDependencies();
 		return approvalDao.rejectApproval(approvalId);
+	}
+
+	@Override
+	public User updateUser(User user) {
+		injectDependencies();
+		return userDao.updateUser(user);
+	}
+
+	@Override
+	public List<Approval> retrieveApprovedApprovalForRequester(Integer requesterId) {
+		injectDependencies();
+		return approvalDao.retrieveApprovedApprovalForRequester(requesterId);
+	}
+
+	@Override
+	public List<Approval> retrievePendingApprovalForUser(Integer userId) {
+		injectDependencies();
+		return approvalDao.retrievePendingApprovalForUser(userId);
 	}
 
 }

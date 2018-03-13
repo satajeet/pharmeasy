@@ -1,6 +1,6 @@
 package org.pharmacy.pharmeasy;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -66,30 +66,8 @@ public class PrescriptionApi {
 	}
 
 	/**
-	 * View list of prescriptions of a patient by a doctor or pharmacist
-	 * 
-	 * @param userId
-	 * @param requester
-	 * @return
-	 */
-	@GET
-	@Path("requester")
-	@Consumes({ MediaType.APPLICATION_JSON })
-	@Produces({ MediaType.APPLICATION_JSON })
-	public Response retrievePrescriptionByRequesterForUser(@QueryParam("userId") Integer userId,
-			@QueryParam("requesterId") Integer requester) {
-		injectDependencies();
-		ArrayList<Prescription> prescriptions = pharmacyManager.retrievePrescriptionByRequesterForUser(userId,
-				requester);
-		if (prescriptions != null) {
-			return Response.ok().entity(prescriptions).build();
-		} else {
-			return Response.status(Status.SERVICE_UNAVAILABLE).entity(prescriptions).build();
-		}
-	}
-
-	/**
-	 * View prescription by patient
+	 * View prescription by patient/user. View list of prescription of a
+	 * patient/user
 	 * 
 	 * @param userId
 	 * @return
@@ -99,7 +77,7 @@ public class PrescriptionApi {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response retrievePrescriptionByUserId(@QueryParam("userId") Integer userId) {
 		injectDependencies();
-		ArrayList<Prescription> prescriptions = pharmacyManager.retrievePrescriptionByUserId(userId);
+		List<Prescription> prescriptions = pharmacyManager.retrievePrescriptionByUserId(userId);
 		if (prescriptions != null) {
 			return Response.ok().entity(prescriptions).build();
 		} else {

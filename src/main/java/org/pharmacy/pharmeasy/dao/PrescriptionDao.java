@@ -1,6 +1,6 @@
 package org.pharmacy.pharmeasy.dao;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.pharmacy.pharmeasy.model.Prescription;
 
@@ -10,8 +10,6 @@ public interface PrescriptionDao {
 
 	public Prescription createPrescription(Prescription prescription);
 
-	public ArrayList<Prescription> retrievePrescriptionByUserId(Integer userId);
-
-	public ArrayList<Prescription> retrievePrescriptionByRequesterForUser(Integer userId, Integer requester);
+	public List<Prescription> retrievePrescriptionByUserId(Integer userId);
 
 }

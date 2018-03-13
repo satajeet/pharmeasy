@@ -1,6 +1,6 @@
 package org.pharmacy.pharmeasy.dao;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.pharmacy.pharmeasy.model.User;
 
@@ -14,6 +14,6 @@ public interface UserDao {
 
 	public User retrieveUserByDetails(String userName, String password);
 
-	public ArrayList<User> retrieveUserByType(String userType);
+	public List<User> retrieveUserByType(String userType);
 
 }

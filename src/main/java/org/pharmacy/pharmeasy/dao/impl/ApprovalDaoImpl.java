@@ -1,6 +1,7 @@
 package org.pharmacy.pharmeasy.dao.impl;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,29 +14,16 @@ import org.pharmacy.pharmeasy.model.Approval;
 
 public class ApprovalDaoImpl implements ApprovalDao {
 
+	static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("rootdb");
+	static EntityManager entityManager = entityManagerFactory.createEntityManager();
+
 	@Override
 	@Transactional
 	public Approval createApproval(Approval approvalObj) {
-		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("rootdb");
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		Query maxIdQuery = entityManager.createQuery("select max(obj.approvalId) from Approval obj");
-		Integer maxId = 0;
-		try {
-			maxId = (Integer) maxIdQuery.getSingleResult();
-		} catch (Exception e) {
-			maxId = 0;
-		}
-		if (maxId == null) {
-			maxId = 0;
-		}
-		Integer approvalId = maxId + 1;
-		approvalObj.setApprovalId(approvalId);
 		try {
 			entityManager.getTransaction().begin();
-			if (!entityManager.contains(approvalObj)) {
-				entityManager.persist(approvalObj);
-				entityManager.flush();
-			}
+			approvalObj = entityManager.merge(approvalObj);
+			entityManager.flush();
 			entityManager.getTransaction().commit();
 			return approvalObj;
 		} catch (Exception e) {
@@ -46,8 +34,6 @@ public class ApprovalDaoImpl implements ApprovalDao {
 	@Override
 	@Transactional
 	public Approval updateApproval(Approval approvalObj) {
-		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("rootdb");
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		try {
 			entityManager.getTransaction().begin();
 			entityManager.merge(approvalObj);
@@ -61,11 +47,10 @@ public class ApprovalDaoImpl implements ApprovalDao {
 
 	@Override
 	public Approval retrieveApproval(Integer approvalId) {
-		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("rootdb");
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		Query query = entityManager.createQuery("select obj from Approval obj where obj.approvalId=:approvalId");
-		query.setParameter("approvalId", approvalId);
 		try {
+			Query query = entityManager.createQuery("select obj from Approval obj where obj.approvalId=:approvalId");
+			query.setParameter("approvalId", approvalId);
+
 			return (Approval) query.getResultList().get(0);
 		} catch (Exception e) {
 			return null;
@@ -73,28 +58,28 @@ public class ApprovalDaoImpl implements ApprovalDao {
 	}
 
 	@Override
-	public ArrayList<Approval> retrieveApprovalForDoctorPharma(Integer requesterId, Integer userId) {
-		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("rootdb");
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		Query query = entityManager
-				.createQuery("select obj from Approval obj where obj.requesterId=:requesterId and obj.userId=:userId");
-		query.setParameter("requesterId", requesterId);
-		query.setParameter("userId", userId);
+	public List<Approval> retrieveApprovalForUserByRequester(Integer requesterId, Integer userId) {
 		try {
-			return (ArrayList<Approval>) query.getResultList();
+			Query query = entityManager.createQuery(
+					"select obj from Approval obj where obj.requesterId=:requesterId and obj.userId=:userId");
+			query.setParameter("requesterId", requesterId);
+			query.setParameter("userId", userId);
+
+			ArrayList<Approval> approvals = (ArrayList<Approval>) query.getResultList();
+			return approvals;
 		} catch (Exception e) {
 			return null;
 		}
 	}
 
 	@Override
-	public ArrayList<Approval> retrieveApprovalForUser(Integer userId) {
-		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("rootdb");
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		Query query = entityManager.createQuery("select obj from approval obj where obj.userId=:userId");
-		query.setParameter("userId", userId);
+	public List<Approval> retrieveApprovalForUser(Integer userId) {
 		try {
-			return (ArrayList<Approval>) query.getResultList();
+			Query query = entityManager.createQuery("select obj from Approval obj where obj.userId=:userId");
+			query.setParameter("userId", userId);
+
+			ArrayList<Approval> approvals = (ArrayList<Approval>) query.getResultList();
+			return approvals;
 		} catch (Exception e) {
 			return null;
 		}
@@ -104,8 +89,6 @@ public class ApprovalDaoImpl implements ApprovalDao {
 	@Transactional
 	public boolean rejectApproval(Integer approvalId) {
 		try {
-			EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("rootdb");
-			EntityManager entityManager = entityManagerFactory.createEntityManager();
 			Approval approval = entityManager.find(Approval.class, approvalId);
 			entityManager.getTransaction().begin();
 			entityManager.remove(approval);
@@ -114,6 +97,34 @@ public class ApprovalDaoImpl implements ApprovalDao {
 			return true;
 		} catch (Exception e) {
 			return false;
+		}
+	}
+
+	@Override
+	public List<Approval> retrieveApprovedApprovalForRequester(Integer requesterId) {
+		try {
+			Query query = entityManager
+					.createQuery("select obj from Approval obj where obj.requesterId=:requesterId and approval='true'");
+			query.setParameter("requesterId", requesterId);
+
+			ArrayList<Approval> approvals = (ArrayList<Approval>) query.getResultList();
+			return approvals;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	@Override
+	public List<Approval> retrievePendingApprovalForUser(Integer userId) {
+		try {
+			Query query = entityManager
+					.createQuery("select obj from Approval obj where obj.userId=:userId and approval='false'");
+			query.setParameter("userId", userId);
+
+			ArrayList<Approval> approvals = (ArrayList<Approval>) query.getResultList();
+			return approvals;
+		} catch (Exception e) {
+			return null;
 		}
 	}
 
